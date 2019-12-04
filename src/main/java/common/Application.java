@@ -1,9 +1,11 @@
 package common;
 
-import net.persgroep.adventofcode.day1.DoubleFuel;
-import net.persgroep.adventofcode.day1.Fuel;
-import net.persgroep.adventofcode.day2.Gravity;
-import net.persgroep.adventofcode.day2.GravityInverted;
+import net.ttroukens.adventofcode.day1.DoubleFuel;
+import net.ttroukens.adventofcode.day1.Fuel;
+import net.ttroukens.adventofcode.day2.Gravity;
+import net.ttroukens.adventofcode.day2.GravityInverted;
+import net.ttroukens.adventofcode.day3.Grid;
+import net.ttroukens.adventofcode.day3.TimeSensitiveGrid;
 
 public class Application {
     public static void main(String[] args) {
@@ -21,6 +23,12 @@ public class Application {
 
         Projector<Integer> projectorGravityInverted = new GravityInverted();
         System.out.println(new Eventstore<>(projectorGravityInverted).replay("input-02.txt"));
+
+        Projector<Integer> projectorGrid = new Grid();
+        System.out.println(new Eventstore<>(projectorGrid).replay("input-03.txt"));
+
+        Projector<Integer> projectorTimeSensitiveGrid = new TimeSensitiveGrid();
+        System.out.println(new Eventstore<>(projectorTimeSensitiveGrid).replay("input-03.txt"));
     }
 
 }

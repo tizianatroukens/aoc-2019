@@ -1,4 +1,4 @@
-package net.persgroep.adventofcode.day2;
+package net.ttroukens.adventofcode.day2;
 
 import common.Projector;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package net.persgroep.adventofcode.day1;
+package net.ttroukens.adventofcode.day1;
 
 import common.Projector;
 
