@@ -2,8 +2,10 @@ package net.ttroukens.adventofcode.day5;
 
 import common.Projector;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -19,6 +21,11 @@ public class GravityAdvanced implements Projector<Integer> {
 
     private static int compute(Integer... positions) {
         Scanner input = new Scanner(System.in);
+        List<Integer> outputs = new ArrayList<>();
+        return compute(input, outputs, positions);
+    }
+
+    public static int compute(Scanner input, List<Integer> outputs, Integer... positions) {
         int currentPosition = 0, currentOperation = 0;
 
         while (currentOperation != 99) {
@@ -47,6 +54,7 @@ public class GravityAdvanced implements Projector<Integer> {
             } else if (currentOperation == 4) {
                 Integer value = retrieveValue(opcode, currentPosition + 1, positions);
                 System.out.println("Value: " + value);
+                outputs.add(value);
                 currentPosition += 2;
             } else if (currentOperation == 5) {
                 Integer valueA = retrieveValue(opcode, currentPosition + 1, positions);
@@ -74,7 +82,7 @@ public class GravityAdvanced implements Projector<Integer> {
                 Integer positionOfResult = positions[currentPosition + 3];
                 positions[positionOfResult] = (valueA.equals(valueB)) ? 1 : 0;
                 currentPosition += 4;
-            } else {
+            } else if (currentOperation != 99) {
                 System.out.println("oops: " + currentOperation);
             }
         }
@@ -82,7 +90,7 @@ public class GravityAdvanced implements Projector<Integer> {
         return positions[0];
     }
 
-    private static LinkedList<Integer> retrieveOpcode(int current) {
+    public static LinkedList<Integer> retrieveOpcode(int current) {
         LinkedList<Integer> opcode = new LinkedList<>();
         while (current > 0) {
             opcode.add(current % 10);
@@ -91,7 +99,7 @@ public class GravityAdvanced implements Projector<Integer> {
         return opcode;
     }
 
-    private static Integer concat(Integer int2, Integer int1) {
+    public static Integer concat(Integer int2, Integer int1) {
         //coming in in the wrong order (last one first), so turning both integers here
         String string1 = toInteger(int1);
         String string2 = toInteger(int2);
@@ -103,7 +111,7 @@ public class GravityAdvanced implements Projector<Integer> {
         return (integer == null) ? "0" : Integer.toString(integer);
     }
 
-    private static Integer retrieveValue(LinkedList<Integer> opcode, Integer positionToRetrieveFrom, Integer... positions) {
+    public static Integer retrieveValue(LinkedList<Integer> opcode, Integer positionToRetrieveFrom, Integer... positions) {
         Integer mode = opcode.pollFirst();
         if (mode == null || mode == 0) {
             int position = positions[positionToRetrieveFrom];
@@ -113,7 +121,7 @@ public class GravityAdvanced implements Projector<Integer> {
         }
     }
 
-    private static void setValue(LinkedList<Integer> opcode, Integer positionToSetValueTo, Integer value, Integer... positions) {
+    public static void setValue(LinkedList<Integer> opcode, Integer positionToSetValueTo, Integer value, Integer... positions) {
         Integer mode = opcode.pollFirst();
         if (mode == null || mode == 0) {
             int position = positions[positionToSetValueTo];

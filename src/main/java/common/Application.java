@@ -11,6 +11,8 @@ import net.ttroukens.adventofcode.day4.Password;
 import net.ttroukens.adventofcode.day5.GravityAdvanced;
 import net.ttroukens.adventofcode.day6.Orbit;
 import net.ttroukens.adventofcode.day6.OrbitDistance;
+import net.ttroukens.adventofcode.day7.Amplifier;
+import net.ttroukens.adventofcode.day7.AmplifierLoop;
 
 public class Application {
     public static void main(String[] args) {
@@ -27,7 +29,9 @@ public class Application {
         run(false, new AdvancedPassword(), "Day 4 Advanced: ", "input-04.txt");
         run(false, new GravityAdvanced(), "Day 5: ", "input-05.txt");
         run(false, new Orbit(), "Day 6: ", "input-06.txt");
-        run(true, new OrbitDistance(), "Day 6 Advanced: ", "input-06.txt");
+        run(false, new OrbitDistance(), "Day 6 Advanced: ", "input-06.txt");
+        run(false, new Amplifier(), "Day 7: ", "input-07.txt");
+        run(true, new AmplifierLoop(), "Day 7 Advanced: ", "input-07.txt");
     }
 
     private static void run(boolean run, Projector<Integer> projector, String title, String inputFile) {
