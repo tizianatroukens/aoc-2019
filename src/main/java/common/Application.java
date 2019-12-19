@@ -15,6 +15,7 @@ import net.ttroukens.adventofcode.day7.Amplifier;
 import net.ttroukens.adventofcode.day7.AmplifierLoop;
 import net.ttroukens.adventofcode.day8.Image;
 import net.ttroukens.adventofcode.day8.ImageAdvanced;
+import net.ttroukens.adventofcode.day9.RevisitingGravity;
 
 public class Application {
     public static void main(String[] args) {
@@ -35,7 +36,8 @@ public class Application {
         run(false, new Amplifier(), "Day 7: ", "input-07.txt");
         run(false, new AmplifierLoop(), "Day 7 Advanced: ", "input-07.txt");
         run(false, new Image(), "Day 8: ", "input-08.txt");
-        run(true, new ImageAdvanced(), "Day 8 Advanced: ", "input-08.txt");
+        run(false, new ImageAdvanced(), "Day 8 Advanced: ", "input-08.txt");
+        run(true, new RevisitingGravity(), "Day 9: ", "input-09.txt");
     }
 
     private static void run(boolean run, Projector projector, String title, String inputFile) {
