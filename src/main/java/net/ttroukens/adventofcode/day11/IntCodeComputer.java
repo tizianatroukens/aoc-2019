@@ -1,6 +1,5 @@
 package net.ttroukens.adventofcode.day11;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
