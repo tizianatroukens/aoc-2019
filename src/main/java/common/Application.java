@@ -2,6 +2,8 @@ package common;
 
 import net.ttroukens.adventofcode.day1.DoubleFuel;
 import net.ttroukens.adventofcode.day1.Fuel;
+import net.ttroukens.adventofcode.day10.MonitoringStation;
+import net.ttroukens.adventofcode.day10.ShootingStation;
 import net.ttroukens.adventofcode.day2.Gravity;
 import net.ttroukens.adventofcode.day2.GravityInverted;
 import net.ttroukens.adventofcode.day3.Grid;
@@ -37,7 +39,9 @@ public class Application {
         run(false, new AmplifierLoop(), "Day 7 Advanced: ", "input-07.txt");
         run(false, new Image(), "Day 8: ", "input-08.txt");
         run(false, new ImageAdvanced(), "Day 8 Advanced: ", "input-08.txt");
-        run(true, new RevisitingGravity(), "Day 9: ", "input-09.txt");
+        run(false, new RevisitingGravity(), "Day 9: ", "input-09.txt");
+        run(false, new MonitoringStation(), "Day 10: ", "input-10.txt");
+        run(true, new ShootingStation(), "Day 10 Advanced: ", "input-10.txt");
     }
 
     private static void run(boolean run, Projector projector, String title, String inputFile) {
