@@ -5,6 +5,7 @@ import net.ttroukens.adventofcode.day1.Fuel;
 import net.ttroukens.adventofcode.day10.MonitoringStation;
 import net.ttroukens.adventofcode.day10.ShootingStation;
 import net.ttroukens.adventofcode.day11.PaintingRobot;
+import net.ttroukens.adventofcode.day12.Tracker;
 import net.ttroukens.adventofcode.day2.Gravity;
 import net.ttroukens.adventofcode.day2.GravityInverted;
 import net.ttroukens.adventofcode.day3.Grid;
@@ -44,7 +45,9 @@ public class Application {
         run(false, new MonitoringStation(), "Day 10: ", "input-10.txt");
         run(false, new ShootingStation(), "Day 10 Advanced: ", "input-10.txt");
         run(false, new PaintingRobot(0), "Day 11: ", "input-11.txt");
-        run(true, new PaintingRobot(1), "Day 11 Advanced: ", "input-11.txt");
+        run(false, new PaintingRobot(1), "Day 11 Advanced: ", "input-11.txt");
+        run(false, new Tracker(0), "Day 12: ", "input-12.txt");
+        run(true, new Tracker(1), "Day 12 Advanced: ", "input-12.txt");
     }
 
     private static void run(boolean run, Projector projector, String title, String inputFile) {
