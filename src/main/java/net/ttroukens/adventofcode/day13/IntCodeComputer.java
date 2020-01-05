@@ -1,7 +1,6 @@
-package net.ttroukens.adventofcode.day11;
+package net.ttroukens.adventofcode.day13;
 
 import java.util.*;
-import java.util.List;
 
 public class IntCodeComputer {
     private int currentPosition = 0;
@@ -10,9 +9,10 @@ public class IntCodeComputer {
     private List<Long> positions;
     private LinkedList<Long> outputs = new LinkedList<>();
 
-    private Map<Coordinate, Color> coordinates;
-    private Direction currentDirection = Direction.UP;
-    private Coordinate currentCoordinate = new Coordinate(0, 0);
+    private Map<Coordinate, TileType> coordinates;
+    private Coordinate ball;
+    private Coordinate paddle;
+    private Long score = -1L;
 
     public IntCodeComputer(List<Long> positions) {
         this.positions = new ArrayList<>(positions);
@@ -22,21 +22,25 @@ public class IntCodeComputer {
         this.coordinates = new HashMap<>();
     }
 
-    public Map<Coordinate, Color> getCoordinates() {
+    public List<Long> getPositions() {
+        return this.positions;
+    }
+
+    public Map<Coordinate, TileType> getCoordinates() {
         return this.coordinates;
     }
 
-    public Coordinate getCurrentCoordinate() {
-        return this.currentCoordinate;
+    public Long getScore() {
+        return this.score;
     }
 
-    public void printImage() {
+    public void printGame() {
         IntSummaryStatistics xSummary = coordinates.keySet().stream().mapToInt(Coordinate::getX).summaryStatistics();
         IntSummaryStatistics ySummary = coordinates.keySet().stream().mapToInt(Coordinate::getY).summaryStatistics();
         for(int y = ySummary.getMin(); y <= ySummary.getMax(); y++) {
             for(int x = xSummary.getMin(); x <= xSummary.getMax(); x++) {
-                Color color = coordinates.getOrDefault(new Coordinate(x, y), Color.BLACK);
-                System.out.print(color == Color.WHITE ? '#' : ' ');
+                TileType tileType = coordinates.getOrDefault(new Coordinate(x, y), TileType.EMPTY);
+                System.out.print(tileType.getPrintValue());
             }
             System.out.println();
         }
@@ -91,8 +95,7 @@ public class IntCodeComputer {
     }
 
     private void readInput(LinkedList<Integer> opcode) {
-        Color color = coordinates.getOrDefault(currentCoordinate, Color.BLACK);
-        Long value = color.getLongValue();
+        Long value = (long)Long.compare(ball.getX(), paddle.getX());
         setValue(opcode, currentPosition + 1, value, currentRelativeBase, positions);
         currentPosition += 2;
     }
@@ -101,16 +104,19 @@ public class IntCodeComputer {
         Long value = retrieveValue(opcode, currentPosition + 1, currentRelativeBase, positions);
         outputs.add(value);
 
-        if (outputs.size() % 2 == 0) {
-            Color color = Color.fromLongValue(outputs.get(outputs.size() - 2));
-            coordinates.put(currentCoordinate, color);
-            System.out.print("-- Color: " + color);
-
-            int direction = Math.toIntExact(outputs.get(outputs.size() - 1));
-            currentDirection = currentDirection.calculateDirection(direction);
-            currentCoordinate = currentDirection.calculateNextCoordinate(currentCoordinate);
-            System.out.print("-- Next: " + currentCoordinate.getX() + "; " + currentCoordinate.getY());
-            System.out.println();
+        if (outputs.size() % 3 == 0) {
+            Long xValue = outputs.get(outputs.size() - 3);
+            Long yValue = outputs.get(outputs.size() - 2);
+            Long outputValue = outputs.get(outputs.size() - 1);
+            if (xValue == -1L && yValue == 0L) {
+                score = outputValue;
+            } else {
+                Coordinate coordinate = new Coordinate(xValue.intValue(), yValue.intValue());
+                TileType tileType = TileType.fromLongValue(outputValue);
+                coordinates.put(coordinate, tileType);
+                if (tileType == TileType.BALL) ball = coordinate;
+                if (tileType == TileType.PADDLE) paddle = coordinate;
+            }
         }
 
         currentPosition += 2;
