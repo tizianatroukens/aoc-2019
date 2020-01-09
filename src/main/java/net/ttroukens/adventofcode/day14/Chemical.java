@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class Chemical {
     private String name;
-    private int produced;
+    private Long produced;
 
-    public Chemical(String name, int produced) {
+    public Chemical(String name, Long produced) {
         this.name = name;
         this.produced = produced;
     }
@@ -15,7 +15,7 @@ public class Chemical {
         return this.name;
     }
 
-    public int getProduced() {
+    public Long getProduced() {
         return this.produced;
     }
 
